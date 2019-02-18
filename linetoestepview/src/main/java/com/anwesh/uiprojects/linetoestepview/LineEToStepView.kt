@@ -206,4 +206,13 @@ class LineEToStepView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : LineEToStepView {
+            val view : LineEToStepView = LineEToStepView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
