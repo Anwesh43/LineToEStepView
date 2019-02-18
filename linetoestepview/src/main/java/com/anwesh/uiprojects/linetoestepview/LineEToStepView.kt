@@ -183,4 +183,26 @@ class LineEToStepView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : LineEToStepView) {
+
+        private val animator : Animator = Animator(view)
+        private val lte : LineToE = LineToE(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            lte.draw(canvas, paint)
+            animator.animate {
+                lte.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            lte.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
