@@ -38,14 +38,15 @@ fun Canvas.drawLTENode(i : Int, scale : Float, paint : Paint) {
     paint.color = foreColor
     paint.strokeWidth = Math.min(w, h) / strokeFactor
     paint.strokeCap = Paint.Cap.ROUND
-    val yGap : Float = (2 * size) / (lines + 1)
+    val yGap : Float = (2 * size) / lines
     save()
     translate(w / 2, gap * (i + 1) - size)
-    drawLine(0f, yGap, 0f, yGap + yGap * lines * sc2, paint)
+    drawLine(0f, 0f, 0f, yGap * (lines - 1) * sc2, paint)
     for (j in 0..(lines - 1)) {
         save()
-        translate(0f, yGap * (j + 1))
-        drawLine(0f, 0f, 0f, yGap * sc1.divideScale(j, lines), paint)
+        translate(0f, yGap * j)
+        rotate(-90f *  sc1.divideScale(j, lines))
+        drawLine(0f, 0f, 0f, yGap, paint)
         restore()
     }
     restore()
